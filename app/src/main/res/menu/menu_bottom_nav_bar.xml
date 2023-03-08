@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="#B4B4B4">
+
+    <item
+        android:id="@+id/navigation_stockAndCrypto"
+        android:icon="@drawable/icon_nav_stocks"
+        android:title="Stocks"/>
+
+    <item
+        android:id="@+id/navigation_ownedBusiness"
+        android:icon="@drawable/icon_nav_owned_business"
+        android:title="Business"/>
+
+    <item
+        android:id="@+id/navigation_earn"
+        android:icon="@drawable/icon_nav_clicker"
+        android:title="Clicker"/>
+
+    <item
+        android:id="@+id/navigation_wealth"
+        android:icon="@drawable/icon_nav_wealth"
+        android:title="Wealth"/>
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/icon_nav_settings"
+        android:title="Settings"/>
+</menu>
