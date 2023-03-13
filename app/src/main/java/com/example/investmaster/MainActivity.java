@@ -151,9 +151,5 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the currently displayed fragment
         FragmentHelper.fetchFragmentAndMethod(fragmentManager);
-
-        System.out.println("OfflineTimeMillis: " + String.format("%d", offlineTimeMillis));
-        System.out.println("offlineTimeMinutes: " + String.format("%.2f", offlineTimeMinutes));
-        System.out.println("offlineIncomeGain: " + String.format("%.2f", offlineIncomeGain));
     }
 }
