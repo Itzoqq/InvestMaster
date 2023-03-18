@@ -1,33 +1,27 @@
 package com.example.investmaster.fragments;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.investmaster.FragmentHelper;
 import com.example.investmaster.GuiHelper;
 import com.example.investmaster.LoadHelper;
-import com.example.investmaster.SaveHelper;
+import com.example.investmaster.MainActivity;
 import com.example.investmaster.R;
+import com.example.investmaster.SaveHelper;
 
-public class StartBusinessFragment extends Fragment {
+public class BuyLocalShopFragment extends Fragment {
 
-    TextView balanceDisplay, incomeDisplay;
-    Button openShopsButton;
-    Button openLocalShopButton, openChainOfShopsButton;
-    LinearLayout shopListLayout;
-
-
+    Button buyLocalShopButton;
+    TextView balanceDisplay;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -39,14 +33,13 @@ public class StartBusinessFragment extends Fragment {
 
     Float localShopCost = 10000.00F;
     Float localShopIncome = 500.00F;
-    Float chainOfShopsCost = 150000.00F;
 
-    public StartBusinessFragment() {
+    public BuyLocalShopFragment() {
+        // Required empty public constructor
     }
 
-
-    public static StartBusinessFragment newInstance(String param1, String param2) {
-        StartBusinessFragment fragment = new StartBusinessFragment();
+    public static BuyLocalShopFragment newInstance(String param1, String param2) {
+        BuyLocalShopFragment fragment = new BuyLocalShopFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,34 +59,23 @@ public class StartBusinessFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_start_business, container, false);
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_buy_local_shop, container, false);
 
+        buyLocalShopButton = rootView.findViewById(R.id.buyLocalShopButton);
         balanceDisplay = rootView.findViewById(R.id.balanceDisplay);
-        incomeDisplay = rootView.findViewById(R.id.incomeDisplay);
-        openShopsButton = rootView.findViewById(R.id.openShopsButton);
-        openLocalShopButton = rootView.findViewById(R.id.openLocalShopButton);
-        openChainOfShopsButton = rootView.findViewById(R.id.openChainOfShopsButton);
-
-        shopListLayout = rootView.findViewById(R.id.shopListLayout);
 
         loadProgress();
-        updateUI();
+        GuiHelper.updateBalanceDisplay(balance, balanceDisplay);
 
-        openShopsButton.setOnClickListener(new View.OnClickListener() {
+        buyLocalShopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (shopListLayout.getVisibility() == View.GONE) {
-                    shopListLayout.setVisibility(View.VISIBLE);
-                } else {
-                    shopListLayout.setVisibility(View.GONE);
-                }
-            }
-        });
-
-        openLocalShopButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentHelper.loadBuyLocalShopFragment(getParentFragmentManager());
+                balance -= localShopCost;
+                income += localShopIncome;
+                SaveHelper.saveBalance(getActivity(), balance);
+                SaveHelper.saveIncome(getActivity(), income);
+                FragmentHelper.loadOwnedBusinessFragment(getParentFragmentManager());
             }
         });
 
@@ -104,20 +86,12 @@ public class StartBusinessFragment extends Fragment {
     public void onResume() {
         super.onResume();
         loadProgress();
-        updateUI();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         saveProgress();
-    }
-
-    public void updateUI() {
-        GuiHelper.updateBalanceDisplay(balance, balanceDisplay);
-        GuiHelper.updateIncomeDisplay(income, incomeDisplay);
-        GuiHelper.enableButtonIfEnoughMoney(balance,localShopCost, openLocalShopButton);
-        GuiHelper.enableButtonIfEnoughMoney(balance,chainOfShopsCost, openChainOfShopsButton);
     }
 
     public void loadProgress() {

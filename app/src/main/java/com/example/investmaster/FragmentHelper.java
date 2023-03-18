@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.investmaster.fragments.BuyLocalShopFragment;
 import com.example.investmaster.fragments.EarnFragment;
 import com.example.investmaster.fragments.OwnedBusinessFragment;
 import com.example.investmaster.fragments.SettingsFragment;
@@ -51,6 +52,15 @@ public class FragmentHelper {
         if (!(fragment instanceof StartBusinessFragment)) {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
             transaction.replace(R.id.fragment_container, new StartBusinessFragment());
+            transaction.commit();
+        }
+    }
+
+    public static void loadBuyLocalShopFragment(FragmentManager fragmentManager) {
+        Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);
+        if (!(fragment instanceof BuyLocalShopFragment)) {
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            transaction.replace(R.id.fragment_container, new BuyLocalShopFragment());
             transaction.commit();
         }
     }

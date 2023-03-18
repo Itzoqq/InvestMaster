@@ -44,16 +44,8 @@ public class GuiHelper {
         }
     }
 
-    public static void checkToDisableGainUpgradeButton(Float balance, Float upgradeCost, Button gainUpgradeButton) {
-        if (balance >= upgradeCost) {
-            gainUpgradeButton.setEnabled(true);
-        } else {
-            gainUpgradeButton.setEnabled(false);
-        }
-    }
-
-    public static void enableButtonIfEnoughMoney(Float balance, Float priceOfBusiness, Button button) {
-        if(balance >= priceOfBusiness) {
+    public static void enableButtonIfEnoughMoney(Float balance, Float price, Button button) {
+        if(balance >= price) {
             button.setEnabled(true);
         } else {
             button.setEnabled(false);

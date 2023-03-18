@@ -129,7 +129,7 @@ public class EarnFragment extends Fragment {
         GuiHelper.updateUpgradeCostDisplay(upgradeCost, gainUpgradeButton);
         GuiHelper.updateIncomeDisplay(income, incomeDisplay);
 
-        GuiHelper.checkToDisableGainUpgradeButton(balance, upgradeCost, gainUpgradeButton);
+        GuiHelper.enableButtonIfEnoughMoney(balance, upgradeCost, gainUpgradeButton);
         GuiHelper.swapUpgradeButtonAndIncomeDisplay(upgradeLevelCounter, pairsGainAndUpgradeCost, gainUpgradeButton, incomeDisplay);
     }
 
